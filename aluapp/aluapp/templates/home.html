@@ -5,7 +5,7 @@
     {% with type=user.usertype.user_type %}
       {% if type == 'TCH' %}
         <li>
-          <a href="#">
+          <a href="{% url 'app:import_list' %}">
             <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
             Import Student List
           </a>
