@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block page-title %}&mdash; Home{% endblock %}
+{% block page_title %}&mdash; Home{% endblock %}
 
 {% block nav_items %}
   <ul class="nav navbar-nav">
@@ -18,7 +18,7 @@
             Post <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="#">Announcement</a></li>
+            <li><a href="{% url 'app:post_announcement' %}">Announcement</a></li>
             <li role="separator" class="divider"></li>
             <li><a href="#">Document Request Form</a></li>
           </ul>

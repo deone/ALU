@@ -27,6 +27,10 @@ def import_list(request):
 
     return render(request, 'app/import_list.html', {'form': form})
 
+@login_required
+def post_announcement(request):
+    return render(request, 'app/post_announcement.html', {})
+
 def logout(request):
     auth_logout(request)
     return redirect('/')
