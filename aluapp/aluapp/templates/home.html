@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
+{% block page-title %}&mdash; Home{% endblock %}
+
 {% block nav_items %}
   <ul class="nav navbar-nav">
     {% with type=user.usertype.user_type %}
@@ -59,11 +61,12 @@
 
           {% csrf_token %}
 
-          <p>What are you?
-          {% for radio in form.user_type %}
-            {{ radio }}
-          {% endfor %}
-          <input type="submit" class="btn btn-primary btn-lg" value="Tell Us">
+          <p>
+            What are you?
+            {% for radio in form.user_type %}
+              {{ radio }}
+            {% endfor %}
+            <button type="submit" class="btn btn-primary btn-lg">Tell Us</button>
           </p>
         </form>
       </div>
