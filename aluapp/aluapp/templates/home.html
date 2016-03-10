@@ -52,19 +52,22 @@
 {% block app_body %}
   <div class="row">
     {% if user and not user.is_anonymous %}
+      {% if not user.usertype.user_type %}
       <div class="jumbotron mid welcome">
         <h1>Hello, {{ user.get_full_name }}.</h1>
-        {% if not user.usertype.user_type %}
-        <form>
+        <form action="" method="post">
+
+          {% csrf_token %}
+
           <p>What are you?
-          {% for radio in form.user_types %}
+          {% for radio in form.user_type %}
             {{ radio }}
           {% endfor %}
-          <a class="btn btn-primary btn-lg" href="#" role="button">Tell Us</a>
+          <input type="submit" class="btn btn-primary btn-lg" value="Tell Us">
           </p>
         </form>
-        {% endif %}
       </div>
+      {% endif %}
     {% else %}
     <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-primary btn-lg mid login" role="button">
       Login With Google
