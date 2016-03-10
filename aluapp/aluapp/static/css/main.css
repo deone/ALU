@@ -14,8 +14,11 @@
   width: 90%;
   margin-top: 3em !important;
 }
-form {
+.import-form {
   width: 50%;
+}
+.announcement-form {
+  width: 90%;
 }
 
 /* Messages */

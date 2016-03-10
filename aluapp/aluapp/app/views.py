@@ -29,7 +29,15 @@ def import_list(request):
 
 @login_required
 def post_announcement(request):
-    return render(request, 'app/post_announcement.html', {})
+    if request.method == 'POST':
+        form = AnnouncementForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Announcement posted successfully.')
+    else:
+        form = AnnouncementForm()
+
+    return render(request, 'app/post_announcement.html', {'form': form})
 
 def logout(request):
     auth_logout(request)

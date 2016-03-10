@@ -28,3 +28,8 @@ class AnnouncementForm(forms.ModelForm):
     class Meta:
         model = Announcement
         exclude = ['date_created']
+
+    def __init__(self, *args, **kwargs):
+        super(AnnouncementForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['body'].widget = forms.Textarea(attrs={'class': 'form-control'})
