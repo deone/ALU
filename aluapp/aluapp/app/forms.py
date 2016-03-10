@@ -23,3 +23,8 @@ class ImportForm(forms.Form):
         for line in lines:
             index_no, first_name, last_name, email = line.split(',')
             Student.objects.create(index_no=index_no, first_name=first_name, last_name=last_name, email=email)
+
+class AnnouncementForm(forms.ModelForm):
+    class Meta:
+        model = Announcement
+        fields = ['title', 'body']
