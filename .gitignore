@@ -1,6 +1,8 @@
-.pyc
+*.pyc
 .Python
 bin
 include
 lib
 pip-*
+algo
+config.py

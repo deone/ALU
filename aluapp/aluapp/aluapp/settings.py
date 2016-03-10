@@ -64,6 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -121,11 +123,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '349327811592-1ujqca0d2d0mii1das7khso23850os75'
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '-szZa6DCQX5sdtAaoAiKxR55'
-
 AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+from config import *
