@@ -2,44 +2,50 @@
 
 {% block nav_items %}
   <ul class="nav navbar-nav">
-    {% if user.usertype.user_type == 'TCH' %}
+    {% with type=user.usertype.user_type %}
+      {% if type == 'TCH' %}
+        <li>
+          <a href="#">
+            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+            Import Student List
+          </a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+            Post <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Announcement</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="#">Document Request Form</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">
+            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+            Download
+          </a>
+        </li>
+      {% else %}
+        {% if type == 'STD' %}
+          <li>
+            <a href="#">
+              <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+              Submit Document
+            </a>
+          </li>
+        {% endif %}
+      {% endif %}
+    {% endwith %}
+    {% if user.usertype.user_type %}
       <li>
         <a href="#">
-          <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-          Import Student List
-        </a>
-      </li>
-      <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-          Post <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="#">Announcement</a></li>
-          <li role="separator" class="divider"></li>
-          <li><a href="#">Document Request Form</a></li>
-        </ul>
-      </li>
-      <li>
-        <a href="#">
-          <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-          Download
-        </a>
-      </li>
-    {% else %}
-      <li>
-        <a href="#">
-          <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-          Submit Document
+          <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+          Discuss
         </a>
       </li>
     {% endif %}
-    <li>
-      <a href="#">
-        <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-        Discuss
-      </a>
-    </li>
   </ul>
 {% endblock %}
 
@@ -49,7 +55,14 @@
       <div class="jumbotron mid welcome">
         <h1>Hello, {{ user.get_full_name }}.</h1>
         {% if not user.usertype.user_type %}
-          <p>What are you? Student or Teacher <a class="btn btn-primary btn-lg" href="#" role="button">Tell Us</a></p>
+        <form>
+          <p>What are you?
+          {% for radio in form.user_types %}
+            {{ radio }}
+          {% endfor %}
+          <a class="btn btn-primary btn-lg" href="#" role="button">Tell Us</a>
+          </p>
+        </form>
         {% endif %}
       </div>
     {% else %}

@@ -6,7 +6,6 @@ class UserType(models.Model):
     STUDENT = 'STD'
 
     TYPE_CHOICES = (
-        ('', 'Select Type'),
         (TEACHER, 'Teacher'),
         (STUDENT, 'Student'),
     )
