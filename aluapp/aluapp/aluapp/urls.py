@@ -21,7 +21,6 @@ from app import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url('', include('social.apps.django_app.urls', namespace='social')),
-    url(r'^$', views.login),
-    url(r'^home/$', views.home),
-    url(r'^logout/$', views.logout),
+    url(r'^$', views.home, name='home'),
+    url(r'^logout/$', views.logout, name='logout'),
 ]
