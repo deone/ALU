@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -119,3 +120,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '349327811592-1ujqca0d2d0mii1das7khso23850os75'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '-szZa6DCQX5sdtAaoAiKxR55'
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
