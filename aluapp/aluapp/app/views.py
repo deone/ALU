@@ -34,6 +34,7 @@ def post_announcement(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Announcement posted successfully.')
+            return redirect('app:post_announcement')
     else:
         form = AnnouncementForm()
 
