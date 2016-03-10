@@ -2,6 +2,11 @@
 
 {% block page_title %}&mdash; Post Announcement{% endblock %}
 
+{% block extra_js %}
+<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+{% endblock %}
+
 {% block app_body %}
 <div class="row">
   <form action="" method="post" class="mid announcement-form">
