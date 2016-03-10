@@ -29,8 +29,21 @@
         </div>
 
         <div class="collapse navbar-collapse" id="logistics-navbar-collapse">
-        {% block nav_items %}
-        {% endblock %}
+          {% block nav_items %}
+          {% endblock %}
+
+          <ul class="nav navbar-nav navbar-right">
+            {% with user=request.user %}
+              {% if user and not user.is_anonymous %}
+                <li>
+                  <a href="{% url 'logout' %}">
+                    <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                    Logout
+                  </a>
+                </li>
+              {% endif %}
+            {% endwith %}
+          </ul>
         </div>
 
       </div>

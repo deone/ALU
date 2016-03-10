@@ -1,22 +1,16 @@
 {% extends 'base.html' %}
 
-{% block nav_items %}
-  <ul class="nav navbar-nav navbar-right">
-    {% with user=request.user %}
-      {% if user and not user.is_anonymous %}
-      <li><a href="{% url 'logout' %}">Logout</a></li>
-      {% endif %}
-    {% endwith %}
-  </ul>
-{% endblock %}
-
 {% block app_body %}
   <div class="row">
     {% with user=request.user %}
       {% if user and not user.is_anonymous %}
-        <p>Hello, {{ user.get_full_name }}!</p>
+        <div class="jumbotron mid welcome">
+          <h1>Hello, {{ user.get_full_name }}.</h1>
+          <p>What are you? Student or Teacher</p>
+          <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+        </div>
       {% else %}
-      <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-primary btn-lg login" role="button">
+      <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-primary btn-lg mid login" role="button">
         Login With Google
       </a>
       {% endif %}

@@ -1,5 +1,12 @@
 .login {
   display: block;
   width: 10em;
-  margin: 10em auto;
+  margin-top: 10em !important;
+}
+.mid {
+  margin: 0 auto;
+}
+.welcome {
+  width: 90%;
+  margin-top: 3em !important;
 }
