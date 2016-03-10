@@ -49,6 +49,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'aluapp.middleware.social_auth_middleware.GoogleAuthExceptionMiddleWare',
 ]
 
 ROOT_URLCONF = 'aluapp.urls'
