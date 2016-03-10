@@ -27,4 +27,4 @@ class ImportForm(forms.Form):
 class AnnouncementForm(forms.ModelForm):
     class Meta:
         model = Announcement
-        fields = ['title', 'body']
+        exclude = ['date_created']
