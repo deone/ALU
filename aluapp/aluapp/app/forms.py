@@ -14,3 +14,6 @@ class UserTypeForm(forms.Form):
         user = User.objects.get(username__iexact=self.user.username)
         user_type = UserType.objects.create(user=user, user_type=self.cleaned_data['user_type'])
         user_type.save()
+
+class ImportForm(forms.Form):
+    student_list = forms.FileField(label='Student List')

@@ -1,4 +1,32 @@
 {% extends 'home.html' %}
 
+{% block page-title %}&mdash; Import Student List{% endblock %}
+
 {% block app_body %}
+<div class="row">
+  <form action="" method="post" enctype="multipart/form-data" class="mid">
+    <fieldset>
+      <div class="page-header">
+        <h1>Import Student List</h1>
+      </div>
+
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <ul class="help-block">
+        <li>Student list must be in .csv format and can contain a maximum of 50 entries.</li>
+        <li>Each entry in the list should contain index number, first name, last name and email address separated by commas.</li>
+        <li>Ensure there are no spaces between words or lines.</li> 
+      </ul>
+
+      <div class="form-group">
+        {{ form.student_list.errors }}
+        <label for="{{ form.student_list.id_for_label }}">{{ form.student_list.label }}</label>
+        {{ form.student_list }}
+      </div>
+
+      <button type="submit" class="btn btn-primary">Import</button>
+    </fieldset>
+  </form>
+</div>
 {% endblock %}
