@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
-from .models import UserType
+from .models import *
 
 class UserTypeForm(forms.Form):
     user_type = forms.ChoiceField(choices=UserType.TYPE_CHOICES, widget=forms.RadioSelect)
@@ -17,3 +17,9 @@ class UserTypeForm(forms.Form):
 
 class ImportForm(forms.Form):
     student_list = forms.FileField(label='Student List')
+
+    def save(self):
+        lines = self.cleaned_data['student_list']
+        for line in lines:
+            index_no, first_name, last_name, email = line.split(',')
+            Student.objects.create(index_no=index_no, first_name=first_name, last_name=last_name, email=email)

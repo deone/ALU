@@ -18,7 +18,7 @@ def home(request):
 
 def import_list(request):
     if request.method == 'POST':
-        form = ImportForm(request.POST)
+        form = ImportForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
     else:
