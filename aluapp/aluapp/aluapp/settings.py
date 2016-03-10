@@ -133,7 +133,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static_live")
+STATIC_ROOT = '/home/deone/webapps/alu_static'
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.google.GoogleOAuth2',
