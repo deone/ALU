@@ -6,8 +6,7 @@ from django.contrib import messages
 from django.conf import settings
 
 from .forms import *
-
-from .models import Announcement
+from .models import *
 
 def home(request):
     if request.method == 'POST':
@@ -51,6 +50,24 @@ def post_announcement(request):
 class AnnouncementDetail(DetailView):
     model = Announcement
     context_object_name = 'announcement'
+
+# @login_required
+""" class DocRequestDetail(DetailView):
+    model = DocumentRequestForm
+    context_object_name = 'doc_request' """
+
+@login_required
+def post_doc_request(request):
+    if request.method == 'POST':
+        form = DocumentRequestForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Document request posted successfully.')
+            return redirect('app:post_doc_request')
+    else:
+        form = DocumentRequestForm()
+
+    return render(request, 'app/post_doc_request.html', {'form': form})
 
 def logout(request):
     auth_logout(request)

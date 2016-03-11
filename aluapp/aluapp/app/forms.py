@@ -32,4 +32,17 @@ class AnnouncementForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(AnnouncementForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget = forms.TextInput(attrs={'class': 'form-control'})
-        self.fields['body'].widget = forms.Textarea(attrs={'class': 'form-control'})
+
+class DocumentRequestForm(forms.ModelForm):
+    class Meta:
+        model = DocumentRequest
+        exclude = ['date_created']
+
+    def __init__(self, *args, **kwargs):
+        super(DocumentRequestForm, self).__init__(*args, **kwargs)
+        self.fields['title'].widget = forms.TextInput(attrs={'class': 'form-control'})
+
+""" class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ['doc'] """
