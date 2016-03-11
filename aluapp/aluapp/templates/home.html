@@ -5,7 +5,7 @@
 {% block nav_items %}
   <ul class="nav navbar-nav">
     {% with type=user.usertype.user_type %}
-      {% if type == 'TCH' %}
+      {% if type == 'STF' %}
         <li>
           <a href="{% url 'app:import_list' %}">
             <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>

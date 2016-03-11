@@ -4,11 +4,11 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 
 class UserType(models.Model):
-    TEACHER = 'TCH'
+    STAFF = 'STF'
     STUDENT = 'STD'
 
     TYPE_CHOICES = (
-        (TEACHER, 'Teacher'),
+        (STAFF, 'Staff'),
         (STUDENT, 'Student'),
     )
     
