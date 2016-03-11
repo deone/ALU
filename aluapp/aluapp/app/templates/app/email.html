@@ -1,0 +1,13 @@
+{% load i18n %}{% autoescape off %}
+
+<p>Hello,</p>
+
+<p>A new {{ type }} has been posted. View it <a href="{{ protocol }}://{{ domain }}{{ obj.get_absolute_url }}">here</a>.</p>
+
+<p>Cheers.</p>
+                  
+<p>Thanks for using our app!</p>
+
+<p>The {{ site_name }} team.</p>
+
+{% endautoescape %}

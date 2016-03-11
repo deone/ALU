@@ -7,6 +7,7 @@ from django.conf import settings
 
 from .forms import *
 from .models import *
+from .helpers import *
 
 def home(request):
     if request.method == 'POST':
@@ -38,7 +39,8 @@ def post_announcement(request):
     if request.method == 'POST':
         form = AnnouncementForm(request.POST)
         if form.is_valid():
-            form.save()
+            announcement = form.save()
+            email_students(announcement)
             messages.success(request, 'Announcement posted successfully.')
             return redirect('app:post_announcement')
     else:
@@ -61,7 +63,8 @@ def post_doc_request(request):
     if request.method == 'POST':
         form = DocumentRequestForm(request.POST)
         if form.is_valid():
-            form.save()
+            doc_request = form.save()
+            email_students(doc_request)
             messages.success(request, 'Document request posted successfully.')
             return redirect('app:post_doc_request')
     else:
