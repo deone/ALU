@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'social.apps.django_app.default',
     'app',
 ]
@@ -141,5 +142,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 LOGIN_URL = '/'
+
+EMAIL_HOST = '74.55.86.74'
+EMAIL_HOST_USER = 'deone'
+EMAIL_HOST_PASSWORD = '@dune369'
 
 from config import *
