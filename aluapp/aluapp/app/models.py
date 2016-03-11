@@ -27,17 +27,20 @@ class Student(models.Model):
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
-class Announcement(models.Model):
+class Common(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField()
     date_created = models.DateTimeField(default=timezone.now)
     slug = models.SlugField(unique=True, editable=False)
 
     class Meta:
+        abstract = True
         ordering = ['-date_created']
 
     def __str__(self):
         return self.title
+
+class Announcement(Common):
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -46,3 +49,19 @@ class Announcement(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return 'app:announcement', (self.slug,)
+
+class DocumentRequest(Common):
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(DocumentRequest, self).save(*args, **kwargs)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'app:doc_request', (self.slug,)
+
+class Document(models.Model):
+    student = models.ForeignKey(Student)
+    doc_request = models.ForeignKey(DocumentRequest)
+    doc = models.FileField()
+    date_submitted = models.DateTimeField(default=timezone.now)
