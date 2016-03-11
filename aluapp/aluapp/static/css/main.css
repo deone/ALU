@@ -11,14 +11,15 @@
   margin: 0 auto;
 }
 .welcome {
-  width: 90%;
   margin-top: 3em !important;
 }
 .import-form {
   width: 50%;
 }
-.announcement-form {
+.width-90 {
   width: 90%;
+}
+.announcement-form {
   margin-bottom: 4em;
 }
 

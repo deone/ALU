@@ -5,15 +5,20 @@ from django.contrib import messages
 
 from .forms import *
 
+from .models import Announcement
+
 def home(request):
     if request.method == 'POST':
         form = UserTypeForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
+            return redirect('home')
     else:
         form = UserTypeForm(user=request.user)
 
-    return render(request, 'home.html', {'form': form})
+    announcements = Announcement.objects.all()
+
+    return render(request, 'home.html', {'form': form, 'announcements': announcements})
 
 @login_required
 def import_list(request):

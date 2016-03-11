@@ -31,5 +31,8 @@ class Announcement(models.Model):
     body = models.TextField()
     date_created = models.DateTimeField(default=timezone.now)
 
+    class Meta:
+        ordering = ['-date_created']
+
     def __str__(self):
         return self.title
