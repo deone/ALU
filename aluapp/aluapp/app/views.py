@@ -3,6 +3,7 @@ from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 from django.contrib import messages
+from django.conf import settings
 
 from .forms import *
 
@@ -48,8 +49,9 @@ def post_announcement(request):
 
 # @login_required
 class AnnouncementDetail(DetailView):
-    pass
+    model = Announcement
+    context_object_name = 'announcement'
 
 def logout(request):
     auth_logout(request)
-    return redirect('/')
+    return redirect(settings.LOGIN_URL)
