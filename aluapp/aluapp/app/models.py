@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
 
@@ -30,9 +31,18 @@ class Announcement(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField()
     date_created = models.DateTimeField(default=timezone.now)
+    slug = models.SlugField(unique=True, editable=False)
 
     class Meta:
         ordering = ['-date_created']
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Announcement, self).save(*args, **kwargs)
+
+    @models.permalink
+    def get_absolute_url(self):
+        pass
