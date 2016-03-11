@@ -83,7 +83,7 @@
         <h1>Announcements</h1>
       </div>
       {% for an in announcements %}
-        <p><a href="">{{ an }}</a></p>
+        <p><a href="{{ an.get_absolute_url }}">{{ an }}</a></p>
       {% endfor %}
     {% endif %}
   </div>

@@ -45,4 +45,4 @@ class Announcement(models.Model):
 
     @models.permalink
     def get_absolute_url(self):
-        pass
+        return 'app:announcement', (self.slug,)

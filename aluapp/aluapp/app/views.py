@@ -1,6 +1,7 @@
 from django.shortcuts import render, render_to_response, redirect
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
+from django.views.generic import DetailView
 from django.contrib import messages
 
 from .forms import *
@@ -44,6 +45,10 @@ def post_announcement(request):
         form = AnnouncementForm()
 
     return render(request, 'app/post_announcement.html', {'form': form})
+
+# @login_required
+class AnnouncementDetail(DetailView):
+    pass
 
 def logout(request):
     auth_logout(request)
