@@ -1,7 +1,11 @@
+html, body {
+  font-family: 'Open Sans Condensed', sans-serif;
+  font-size: 105%;
+}
 .header {
   margin-bottom: 0;
+  border-radius: 0;
 }
-
 .login {
   display: block;
   width: 10em;
@@ -21,6 +25,9 @@
 }
 .announcement-form {
   margin-bottom: 4em;
+}
+.feed h2 {
+  font-size: 125%;
 }
 
 /* Messages */

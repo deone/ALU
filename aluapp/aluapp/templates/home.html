@@ -5,6 +5,18 @@
 {% block nav_items %}
   <ul class="nav navbar-nav">
     {% with type=user.usertype.user_type %}
+      <li>
+        <a href="{% url 'home' %}">
+          <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+          {% if type == 'STF' %}
+            View Submissions
+          {% else %}
+            {% if type == 'STD' %}
+              View Announcements
+            {% endif %}
+          {% endif %}
+        </a>
+      </li>
       {% if type == 'STF' %}
         <li>
           <a href="{% url 'app:import_list' %}">
@@ -77,14 +89,19 @@
     </a>
   {% endif %}
 
-  <div class="mid width-90">
-    {% if user.usertype.user_type == 'STD' and announcements %}
-      <div class="page-header">
-        <h1>Announcements</h1>
-      </div>
-      {% for an in announcements %}
-        <p><a href="{{ an.get_absolute_url }}">{{ an }}</a></p>
-      {% endfor %}
+  <div class="mid width-90 feed">
+    <div class="page-header">
+      <h1>News Feed</h1>
+    </div>
+
+    {% if user.usertype.user_type == 'STD' %}
+      {% if announcements %}
+        <h2>Announcements</h2>
+        {% for an in announcements %}
+          <p><a href="{{ an.get_absolute_url }}">{{ an }}</a></p>
+        {% endfor %}
+      {% endif %}
+
     {% endif %}
   </div>
 
