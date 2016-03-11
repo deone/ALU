@@ -4,55 +4,56 @@
 
 {% block nav_items %}
   <ul class="nav navbar-nav">
-    {% with type=user.usertype.user_type %}
-      <li>
-        <a href="{% url 'home' %}">
-          <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
-          {% if type == 'STF' %}
-            View Submissions
-          {% else %}
-            {% if type == 'STD' %}
-              View Announcements
-            {% endif %}
-          {% endif %}
-        </a>
-      </li>
-      {% if type == 'STF' %}
-        <li>
-          <a href="{% url 'app:import_list' %}">
-            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-            Import Student List
-          </a>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-            <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-            Post <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu">
-            <li><a href="{% url 'app:post_announcement' %}">Announcement</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Document Request Form</a></li>
-          </ul>
-        </li>
-        <li>
-          <a href="#">
-            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
-            Download
-          </a>
-        </li>
-      {% else %}
-        {% if type == 'STD' %}
+    {% if user.is_authenticated and user.usertype.user_type %}
+      {% with type=user.usertype.user_type %}
+        {% if type == 'STF' %}
           <li>
-            <a href="#">
-              <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-              Submit Document
+            <a href="{% url 'home' %}">
+              <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+              View Submissions
             </a>
           </li>
+          <li>
+            <a href="{% url 'app:import_list' %}">
+              <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+              Import Student List
+            </a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+              <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+              Post <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li><a href="{% url 'app:post_announcement' %}">Announcement</a></li>
+              <li role="separator" class="divider"></li>
+              <li><a href="#">Document Request Form</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">
+              <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+              Download
+            </a>
+          </li>
+        {% else %}
+          {% if type == 'STD' %}
+            <li>
+              <a href="{% url 'home' %}">
+                <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+                View Announcements
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                Submit Document
+              </a>
+            </li>
+          {% endif %}
         {% endif %}
-      {% endif %}
-    {% endwith %}
-    {% if user.usertype.user_type %}
+      {% endwith %}
+
       <li>
         <a href="#">
           <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
@@ -64,49 +65,45 @@
 {% endblock %}
 
 {% block app_body %}
-<div class="row">
-  {% if user and not user.is_anonymous %}
-    {% if not user.usertype.user_type %}
-      <div class="jumbotron mid width-90 welcome">
-        <h1>Hello, {{ user.get_full_name }}.</h1>
-        <form action="" method="post">
+  <div class="row">
+    {% if not user.is_authenticated %}
+      <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-primary btn-lg mid login" role="button">
+        Login With Google
+      </a>
+    {% else %}
+      {% if not user.usertype.user_type %}
+        <div class="jumbotron mid width-90 welcome">
+          <h1>Hello, {{ user.get_full_name }}.</h1>
+          <form action="" method="post">
 
-          {% csrf_token %}
+            {% csrf_token %}
 
-          <p>
-            What are you?
-            {% for radio in form.user_type %}
-              {{ radio }}
-            {% endfor %}
-            <button type="submit" class="btn btn-primary btn-lg">Tell Us</button>
-          </p>
-        </form>
-      </div>
-    {% endif %}
-  {% else %}
-    <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-primary btn-lg mid login" role="button">
-      Login With Google
-    </a>
-  {% endif %}
-
-  <div class="mid width-90 feed">
-    {% if user and not user.is_anonymous %}
-      <div class="page-header">
-        <h1>News Feed</h1>
-      </div>
-    {% endif %}
-
-    {% if user.usertype.user_type == 'STD' %}
-      {% if announcements %}
-        <h2>Announcements</h2>
-        {% for an in announcements %}
-          <p><a href="{{ an.get_absolute_url }}">{{ an }}</a></p>
-        {% endfor %}
+            <p>
+              What are you?
+              {% for radio in form.user_type %}
+                {{ radio }}
+              {% endfor %}
+              <button type="submit" class="btn btn-primary btn-lg">Tell Us</button>
+            </p>
+          </form>
+        </div>
       {% endif %}
+    {% endif %}
 
+    {% if user.is_authenticated and user.usertype.user_type %}
+      <div class="mid width-90 feed">
+        <div class="page-header">
+          <h1>News Feed</h1>
+        </div>
+        {% if user.usertype.user_type == 'STD' %}
+          {% if announcements %}
+            <h2>Announcements</h2>
+            {% for an in announcements %}
+              <p><a href="{{ an.get_absolute_url }}">{{ an }}</a></p>
+            {% endfor %}
+          {% endif %}
+        {% endif %}
+      </div>
     {% endif %}
   </div>
-
-</div>
-
 {% endblock %}
