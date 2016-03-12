@@ -57,3 +57,8 @@ html, body {
 .alu-table tbody tr td.date-created {
   cursor: default;
 }
+.new-topic {
+  display: inline-block;
+  margin-left: 85%;
+  font-size: 60%;
+}
