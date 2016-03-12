@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^logout/$', views.logout, name='logout'),
     url(r'', include('social.apps.django_app.urls', namespace='social')),
     url(r'^app/', include('app.urls', namespace='app')),
+    url(r'^discuss/', include('discuss.urls', namespace='discuss')),
     url(r'^admin/', admin.site.urls),
 ]

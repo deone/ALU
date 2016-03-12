@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'social.apps.django_app.default',
     'app',
+    'discuss',
 ]
 
 MIDDLEWARE_CLASSES = [
