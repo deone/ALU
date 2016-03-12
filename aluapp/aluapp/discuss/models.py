@@ -25,6 +25,7 @@ class Category(Common):
 class Topic(Common):
     user = models.ForeignKey(User)
     category = models.ForeignKey(Category)
+    comment = models.TextField()
 
     @models.permalink
     def get_absolute_url(self):
