@@ -2,7 +2,7 @@
 
 {% load humanize %}
 
-{% block page_title %}&mdash; Discuss{% endblock %}
+{% block page_title %}&mdash; Discuss {% block topic_title %}{% endblock %}{% endblock %}
 
 {% block app_body %}
   {% if topics %}
