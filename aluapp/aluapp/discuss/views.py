@@ -9,6 +9,10 @@ def index(request):
     topics = Topic.objects.filter(user=request.user)
     return render(request, 'discuss/index.html', {'topics': topics})
 
+@login_required
+def new_topic(request):
+    return render(request, 'discuss/new_topic.html')
+
 # @login_required
 class TopicDetail(DetailView):
     model = Topic
