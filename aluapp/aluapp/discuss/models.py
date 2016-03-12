@@ -4,8 +4,11 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+from utils import AutoSlugField
+
 class Common(models.Model):
-    slug = models.SlugField(unique=True, editable=False)
+    title = models.CharField(max_length=255)
+    slug = AutoSlugField(populate_from="title", db_index=False, blank=True)
     date_created = models.DateTimeField(default=timezone.now)
 
     class Meta:
@@ -13,9 +16,12 @@ class Common(models.Model):
     
 
 class Category(Common):
-    name = models.CharField(max_length=50)
+    class Meta:
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.title
 
 class Topic(Common):
     user = models.ForeignKey(User)
-    title = models.CharField(max_length=255)
     category = models.ForeignKey(Category)
