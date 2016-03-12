@@ -23,8 +23,8 @@ html, body {
 .width-90 {
   width: 90%;
 }
-.announcement-form {
-  margin-bottom: 4em;
+form {
+  padding-bottom: 3em;
 }
 .feed h2 {
   font-size: 125%;
@@ -47,6 +47,8 @@ html, body {
 .messages li {
   padding: .5em 0 .5em .5em;
 }
+
+/* Discuss */
 .alu-table tbody tr td {
   border-top: none;
   border-bottom: 1px solid #eee;

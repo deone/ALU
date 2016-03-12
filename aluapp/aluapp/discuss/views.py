@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 
 from .models import Topic
+from .forms import NewTopicForm
 
 @login_required
 def index(request):
@@ -11,7 +12,12 @@ def index(request):
 
 @login_required
 def new_topic(request):
-    return render(request, 'discuss/new_topic.html')
+    if request.method == 'POST':
+        pass
+    else:
+        form = NewTopicForm()
+
+    return render(request, 'discuss/new_topic.html', {'form': form})
 
 # @login_required
 class TopicDetail(DetailView):
