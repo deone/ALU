@@ -8,30 +8,32 @@
 {% endblock %}
 
 {% block app_body %}
-<div class="row">
-  <form action="" method="post" class="mid width-90">
-    <fieldset>
-      <div class="page-header">
-        {% block form_header %}<h1>Post Announcement</h1>{% endblock %}
-      </div>
+<div class="mid width-90">
+  <div class="row">
+    <form action="" method="post">
+      <fieldset>
+        <div class="page-header">
+          {% block form_header %}<h1>Post Announcement</h1>{% endblock %}
+        </div>
 
-      {% csrf_token %}
-      {{ form.non_field_errors }}
+        {% csrf_token %}
+        {{ form.non_field_errors }}
 
-      <div class="form-group">
-        {{ form.title.errors }}
-        <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
-        {{ form.title }}
-      </div>
+        <div class="form-group">
+          {{ form.title.errors }}
+          <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+          {{ form.title }}
+        </div>
 
-      <div class="form-group">
-        {{ form.body.errors }}
-        <label for="{{ form.body.id_for_label }}">{{ form.body.label }}</label>
-        {{ form.body }}
-      </div>
-      
-      <button type="submit" class="btn btn-primary">Post</button>
-    </fieldset>
-  </form>
+        <div class="form-group">
+          {{ form.body.errors }}
+          <label for="{{ form.body.id_for_label }}">{{ form.body.label }}</label>
+          {{ form.body }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Post</button>
+      </fieldset>
+    </form>
+  </div>
 </div>
 {% endblock %}

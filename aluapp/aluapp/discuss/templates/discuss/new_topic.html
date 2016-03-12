@@ -8,36 +8,38 @@
 {% endblock %}
 
 {% block app_body %}
-<div class="row">
-  <form action="" method="post" class="mid announcement-form width-90">
-    <fieldset>
-      <div class="page-header">
-        <h1>New Topic</h1>
-      </div>
+<div class="mid width-90">
+  <div class="row">
+    <form action="" method="post">
+      <fieldset>
+        <div class="page-header">
+          <h1>New Topic</h1>
+        </div>
 
-      {% csrf_token %}
-      {{ form.non_field_errors }}
+        {% csrf_token %}
+        {{ form.non_field_errors }}
 
-      <div class="form-group">
-        {{ form.title.errors }}
-        <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
-        {{ form.title }}
-      </div>
+        <div class="form-group">
+          {{ form.title.errors }}
+          <label for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+          {{ form.title }}
+        </div>
 
-      <div class="form-group">
-        {{ form.category.errors }}
-        <label for="{{ form.category.id_for_label }}">{{ form.category.label }}</label>
-        {{ form.category }}
-      </div>
+        <div class="form-group">
+          {{ form.category.errors }}
+          <label for="{{ form.category.id_for_label }}">{{ form.category.label }}</label>
+          {{ form.category }}
+        </div>
 
-      <div class="form-group">
-        {{ form.comment.errors }}
-        <label for="{{ form.comment.id_for_label }}">{{ form.comment.label }}</label>
-        {{ form.comment }}
-      </div>
-      
-      <button type="submit" class="btn btn-primary">Publish</button>
-    </fieldset>
-  </form>
+        <div class="form-group">
+          {{ form.comment.errors }}
+          <label for="{{ form.comment.id_for_label }}">{{ form.comment.label }}</label>
+          {{ form.comment }}
+        </div>
+        
+        <button type="submit" class="btn btn-primary">Publish</button>
+      </fieldset>
+    </form>
+  </div>
 </div>
 {% endblock %}

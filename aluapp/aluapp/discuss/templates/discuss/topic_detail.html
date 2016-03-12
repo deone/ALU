@@ -1,3 +1,28 @@
 {% extends 'discuss/index.html' %}
 
+{% load comments %}
+
 {% block discuss_page_title %}&mdash; {{ topic.title }}{% endblock %}
+
+{% block app_body %}
+<div class="mid width-90">
+  <div class="row">
+    <div class="page-header">
+      <h1>{{ topic.title }}</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" style="background: #ff0; height: 2em; border: solid 1px #eee;"></div>
+    <div class="col-md-4" style="background: #ff0; height: 2em; border: solid 1px #eee;"></div>
+    <div class="col-md-4" style="background: #ff0; height: 2em; border: solid 1px #eee;"></div>
+    {{ topic.user.username }}
+    {{ topic.user.get_full_name }}
+    {{ topic.comment }}
+  </div>
+
+  <div class="row">
+    {% render_comment_form for topic %}
+  </div>
+</div>
+{% endblock %}
