@@ -28,4 +28,4 @@ class Topic(Common):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'discuss:topic', (self.slug,)
+        return 'discuss:topic', (self.id, self.slug,)
