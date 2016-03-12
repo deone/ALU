@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 
@@ -13,7 +13,12 @@ def index(request):
 @login_required
 def new_topic(request):
     if request.method == 'POST':
-        pass
+        form = NewTopicForm(request.POST, user=request.user)
+        if form.is_valid():
+            topic = form.save(commit=False)
+            topic.user = request.user
+            topic.save()
+            return redirect('discuss:new_topic')
     else:
         form = NewTopicForm()
 
