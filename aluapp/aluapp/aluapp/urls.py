@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'', include('social.apps.django_app.urls', namespace='social')),
     url(r'^app/', include('app.urls', namespace='app')),
     url(r'^discuss/', include('discuss.urls', namespace='discuss')),
+    url(r'^comments/', include('django_comments.urls', namespace='comments')),
     url(r'^admin/', admin.site.urls),
 ]
