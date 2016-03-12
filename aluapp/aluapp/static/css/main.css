@@ -52,5 +52,8 @@ html, body {
   border-bottom: 1px solid #eee;
 }
 .alu-table tbody tr td.post-title {
-  width: 80%;
+  width: 94.2%;
+}
+.alu-table tbody tr td.date-created {
+  cursor: default;
 }

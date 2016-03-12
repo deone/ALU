@@ -1,5 +1,7 @@
 {% extends 'home.html' %}
 
+{% load humanize %}
+
 {% block page_title %}&mdash; Discuss{% endblock %}
 
 {% block app_body %}
@@ -14,7 +16,7 @@
             {% for topic in topics %}
             <tr>
               <td class="post-title"><a href="{{ topic.get_absolute_url }}">{{ topic.title }}</a></td>
-              <td>{{ topic.date_created }}</td>
+              <td class="date-created" title="{{ topic.date_created }}"><i class="fa fa-clock-o"></i> {{ topic.date_created | naturalday }}</td>
             </tr>
             {% endfor %}
           </tbody>
