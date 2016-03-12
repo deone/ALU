@@ -47,3 +47,10 @@ html, body {
 .messages li {
   padding: .5em 0 .5em .5em;
 }
+.alu-table tbody tr td {
+  border-top: none;
+  border-bottom: 1px solid #eee;
+}
+.alu-table tbody tr td.post-title {
+  width: 80%;
+}

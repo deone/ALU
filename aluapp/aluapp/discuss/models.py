@@ -13,15 +13,19 @@ class Common(models.Model):
 
     class Meta:
         abstract = True
+
+    def __str__(self):
+        return self.title
     
 
 class Category(Common):
     class Meta:
         verbose_name_plural = 'Categories'
 
-    def __str__(self):
-        return self.title
-
 class Topic(Common):
     user = models.ForeignKey(User)
     category = models.ForeignKey(Category)
+
+    @models.permalink
+    def get_absolute_url(self):
+        return 'discuss:topic', (self.slug,)
