@@ -8,8 +8,8 @@ from utils import AutoSlugField
 
 class Common(models.Model):
     title = models.CharField(max_length=255)
-    slug = AutoSlugField(populate_from="title", db_index=False, blank=True)
-    date_created = models.DateTimeField(default=timezone.now)
+    slug = AutoSlugField(populate_from="title", db_index=False, blank=True, editable=False)
+    date_created = models.DateTimeField(default=timezone.now, editable=False)
 
     class Meta:
         abstract = True
