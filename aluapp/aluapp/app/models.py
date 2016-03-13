@@ -57,7 +57,7 @@ class DocumentType(models.Model):
         return self.document_type
 
 class DocumentRequest(Common):
-    upload_quantity = models.PositiveSmallIntegerField()
+    upload_quantity = models.PositiveSmallIntegerField('Number Of Files Allowed')
 
     @models.permalink
     def get_absolute_url(self):

@@ -30,6 +30,8 @@
           <label for="{{ form.body.id_for_label }}">{{ form.body.label }}</label>
           {{ form.body }}
         </div>
+
+        {% block extra_fields %}{% endblock %}
         
         <button type="submit" class="btn btn-primary">Post</button>
       </fieldset>

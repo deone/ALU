@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 from .models import *
+from utils import get_list
 
 class UserTypeForm(forms.Form):
     user_type = forms.ChoiceField(choices=UserType.TYPE_CHOICES, widget=forms.RadioSelect)
@@ -41,6 +42,7 @@ class DocumentRequestForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(DocumentRequestForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget = forms.TextInput(attrs={'class': 'form-control'})
+        self.fields['upload_quantity'].widget = forms.TextInput(attrs={'class': 'form-control'})
 
 """ class DocumentForm(forms.ModelForm):
     class Meta:

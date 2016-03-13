@@ -3,3 +3,11 @@
 {% block page_title %}&mdash; Post Document Request{% endblock %}
 
 {% block form_header %}<h1>Post Document Request</h1>{% endblock %}
+
+{% block extra_fields %}
+<div class="form-group">
+  {{ form.upload_quantity.errors }}
+  <label for="{{ form.upload_quantity.id_for_label }}">{{ form.upload_quantity.label }}</label>
+  {{ form.upload_quantity }}
+</div>
+{% endblock %}
