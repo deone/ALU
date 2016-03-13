@@ -19,8 +19,13 @@ def home(request):
         form = UserTypeForm(user=request.user)
 
     announcements = Announcement.objects.all()
+    doc_requests = DocumentRequest.objects.all()
 
-    return render(request, 'home.html', {'form': form, 'announcements': announcements})
+    return render(request, 'home.html', {
+      'form': form,
+      'announcements': announcements,
+      'document_requests': doc_requests,
+      })
 
 @login_required
 def import_list(request):
