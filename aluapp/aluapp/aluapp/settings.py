@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'social.apps.django_app.default',
     'app',
     'discuss',
+    'alu_comments',
 ]
+
+COMMENTS_APP = 'alu_comments'
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
