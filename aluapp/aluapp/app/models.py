@@ -20,6 +20,9 @@ class UserType(models.Model):
     def __str__(self):
         return self.user.username
 
+    class Meta:
+        verbose_name_plural = 'User Types'
+
 class Student(models.Model):
     index_no = models.CharField(max_length=10)
     first_name = models.CharField(max_length=20)
@@ -34,7 +37,7 @@ class Student(models.Model):
 class Common(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField()
-    date_created = models.DateTimeField(default=timezone.now)
+    date_created = models.DateTimeField(default=timezone.now, editable=False)
     slug = AutoSlugField(populate_from="title", db_index=False, blank=True, editable=False)
 
     class Meta:
@@ -65,6 +68,9 @@ class DocumentRequest(Common):
 
     def __str__(self):
         return self.document_type.document_type
+
+    class Meta:
+        verbose_name_plural = 'Document Requests'
 
 class Document(models.Model):
     user = models.ForeignKey(User)
