@@ -54,9 +54,9 @@ class AnnouncementDetail(DetailView):
     context_object_name = 'announcement'
 
 # @login_required
-""" class DocRequestDetail(DetailView):
+class DocRequestDetail(DetailView):
     model = DocumentRequestForm
-    context_object_name = 'doc_request' """
+    context_object_name = 'document_request'
 
 @login_required
 def post_doc_request(request):

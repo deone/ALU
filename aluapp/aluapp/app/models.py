@@ -64,10 +64,10 @@ class DocumentRequest(Common):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'app:doc_request', (self.slug,)
+        return 'app:document_request', (self.slug,)
 
     def __str__(self):
-        return self.document_type.document_type
+        return self.title
 
     class Meta:
         verbose_name_plural = 'Document Requests'
