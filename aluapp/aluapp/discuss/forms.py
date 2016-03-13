@@ -28,3 +28,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         exclude = ['user']
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        self.topic = kwargs.pop('topic', None)
+        super(CommentForm, self).__init__(*args, **kwargs)

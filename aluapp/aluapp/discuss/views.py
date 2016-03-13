@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 
 from .models import Topic
-from .forms import NewTopicForm
+from .forms import NewTopicForm, CommentForm
 
 @login_required
 def index(request):
@@ -24,7 +24,13 @@ def new_topic(request):
 
     return render(request, 'discuss/new_topic.html', {'form': form})
 
-# @login_required
-class TopicDetail(DetailView):
-    model = Topic
-    context_object_name = 'topic'
+@login_required
+def topic_detail(request, pk, slug):
+    topic = Topic.objects.get(pk=pk)
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST, topic=topic, user=request.user)
+    else:
+        form = CommentForm(topic=topic, user=request.user)
+
+    return render(request, 'discuss/topic_detail.html', {'topic': topic, 'form': form})
