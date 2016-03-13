@@ -35,4 +35,4 @@ class Comment(models.Model):
     user = models.ForeignKey(User)
     topic = models.ForeignKey(Topic)
     comment = models.TextField()
-    date_submitted = models.DateTimeField(default=timezone.now)
+    date_submitted = models.DateTimeField(default=timezone.now, editable=False)
