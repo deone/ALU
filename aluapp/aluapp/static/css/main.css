@@ -85,3 +85,8 @@ form {
 }
 .comment-form {
 }
+
+/* Announcement */
+.post {
+  min-height: 300px;
+}
