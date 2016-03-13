@@ -15,7 +15,7 @@ def get_categories():
 class NewTopicForm(forms.ModelForm):
     class Meta:
         model = Topic
-        fields = ['title', 'category', 'comment']
+        exclude = ['user']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -23,3 +23,8 @@ class NewTopicForm(forms.ModelForm):
         self.fields['title'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['category'].widget = forms.Select(attrs={'class': 'form-control'})
         self.fields['category'].choices = get_categories()
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        exclude = ['user']

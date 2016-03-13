@@ -25,8 +25,14 @@ class Category(Common):
 class Topic(Common):
     user = models.ForeignKey(User)
     category = models.ForeignKey(Category)
-    comment = models.TextField()
+    description = models.TextField()
 
     @models.permalink
     def get_absolute_url(self):
         return 'discuss:topic', (self.id, self.slug,)
+
+class Comment(models.Model):
+    user = models.ForeignKey(User)
+    topic = models.ForeignKey(Topic)
+    comment = models.TextField()
+    date_submitted = models.DateTimeField(default=timezone.now)
