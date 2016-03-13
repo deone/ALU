@@ -62,3 +62,15 @@ class AutoSlugField(SlugField):
             kwargs['populate_from'] = self.populate_from
 
         return name, path, args, kwargs
+
+def get_list(klass):
+    lst = [('', 'Select')]
+
+    for obj in klass.objects.all():
+        if hasattr(obj, 'title'):
+            tup = (obj.id, obj.title)
+        else:
+            tup = (obj.id, obj.document_type)
+        lst.append(tup)
+
+    return lst

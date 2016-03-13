@@ -2,15 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 from .models import *
-
-def get_categories():
-    category_list = [('', 'Select')]
-
-    for category in Category.objects.all():
-        tup = (category.id, category.title)
-        category_list.append(tup)
-        
-    return category_list
+from utils import get_list
 
 class NewTopicForm(forms.ModelForm):
     class Meta:
@@ -21,7 +13,7 @@ class NewTopicForm(forms.ModelForm):
         super(NewTopicForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['category'].widget = forms.Select(attrs={'class': 'form-control'})
-        self.fields['category'].choices = get_categories()
+        self.fields['category'].choices = get_list(Category)
 
 class CommentForm(forms.ModelForm):
     class Meta:
