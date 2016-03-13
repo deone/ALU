@@ -27,6 +27,8 @@ class Student(models.Model):
     def __str__(self):
         return "%s %s" % (self.first_name, self.last_name)
 
+
+# These should be in another app
 class Common(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField()
@@ -50,7 +52,15 @@ class Announcement(Common):
     def get_absolute_url(self):
         return 'app:announcement', (self.slug,)
 
+class DocumentType(models.Model):
+    document_type = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.document_type
+
 class DocumentRequest(Common):
+    document_type = models.ForeignKey(DocumentType)
+    upload_quantity = models.PositiveSmallIntegerField()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -60,8 +70,15 @@ class DocumentRequest(Common):
     def get_absolute_url(self):
         return 'app:doc_request', (self.slug,)
 
+    def __str__(self):
+        return self.document_type.document_type
+
 class Document(models.Model):
-    student = models.ForeignKey(Student)
+    user = models.ForeignKey(User)
+    document_type = models.ForeignKey(DocumentType)
     doc_request = models.ForeignKey(DocumentRequest)
     doc = models.FileField()
     date_submitted = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return "%s %s" % (self.user.get_full_name(), self.document_type.document_type)
