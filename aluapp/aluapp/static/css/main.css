@@ -67,6 +67,8 @@ form {
 .topic {
   margin-bottom: 20px;
   min-height: 250px;
+  border-bottom: solid 1px #ddd;
+  padding-bottom: 20px;
 }
 .topic .name {
   margin-bottom: 1em;
@@ -78,5 +80,4 @@ form {
   border-radius: 50%;
 }
 .comment-form {
-  background: #ff0;
 }

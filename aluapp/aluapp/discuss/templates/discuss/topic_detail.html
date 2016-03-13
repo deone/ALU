@@ -2,8 +2,6 @@
 
 {% load humanize %}
 
-{% load comments %}
-
 {% block discuss_page_title %}&mdash; {{ topic.title }}{% endblock %}
 
 {% block app_body %}
@@ -15,7 +13,7 @@
   </div>
 
   <div class="topic row">
-    <div class="col-md-2 pull-left">
+    <div class="col-md-2">
       <p class="name">{{ topic.user.get_full_name }}</p>
       <div class="pic"></div>
     </div>
@@ -27,9 +25,12 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="comment-form">
-      {% render_comment_form for topic %}
+  <div class="comment-form row">
+    <div class="col-md-2">
+      <p class="name">{{ user.get_full_name }}</p>
+      <div class="pic"></div>
+    </div>
+    <div class="col-md-10">
     </div>
   </div>
 </div>
