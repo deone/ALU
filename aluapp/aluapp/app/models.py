@@ -57,7 +57,6 @@ class DocumentType(models.Model):
         return self.document_type
 
 class DocumentRequest(Common):
-    document_type = models.ForeignKey(DocumentType)
     upload_quantity = models.PositiveSmallIntegerField()
 
     @models.permalink
@@ -71,8 +70,8 @@ class Document(models.Model):
     user = models.ForeignKey(User)
     document_type = models.ForeignKey(DocumentType)
     doc_request = models.ForeignKey(DocumentRequest)
-    doc = models.FileField()
-    date_submitted = models.DateTimeField(default=timezone.now)
+    document = models.FileField()
+    date_submitted = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
         return "%s %s" % (self.user.get_full_name(), self.document_type.document_type)
