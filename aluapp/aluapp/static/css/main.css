@@ -64,9 +64,8 @@ form {
   margin-left: 85%;
   font-size: 60%;
 }
-.topic {
+.topic, .comment {
   margin-bottom: 20px;
-  min-height: 250px;
   border-bottom: solid 1px #ddd;
   padding-bottom: 20px;
 }
@@ -78,6 +77,11 @@ form {
   width: 5em;
   background: #ddd;
   border-radius: 50%;
+}
+.description {
+  letter-spacing: .05em;
+  word-spacing: .1em;
+  font-size: 90%;
 }
 .comment-form {
 }

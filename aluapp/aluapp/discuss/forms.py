@@ -27,7 +27,7 @@ class NewTopicForm(forms.ModelForm):
 class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
-        exclude = ['user']
+        exclude = ['user', 'topic']
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)

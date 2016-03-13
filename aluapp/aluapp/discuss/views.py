@@ -30,6 +30,12 @@ def topic_detail(request, pk, slug):
 
     if request.method == 'POST':
         form = CommentForm(request.POST, topic=topic, user=request.user)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.user = request.user
+            comment.topic = topic
+            comment.save()
+            return redirect('discuss:topic', pk=pk, slug=slug)
     else:
         form = CommentForm(topic=topic, user=request.user)
 
