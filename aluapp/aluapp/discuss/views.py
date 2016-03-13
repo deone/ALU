@@ -13,7 +13,7 @@ def index(request):
 @login_required
 def new_topic(request):
     if request.method == 'POST':
-        form = NewTopicForm(request.POST, user=request.user)
+        form = NewTopicForm(request.POST)
         if form.is_valid():
             topic = form.save(commit=False)
             topic.user = request.user
@@ -29,7 +29,7 @@ def topic_detail(request, pk, slug):
     topic = Topic.objects.get(pk=pk)
 
     if request.method == 'POST':
-        form = CommentForm(request.POST, topic=topic, user=request.user)
+        form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.user = request.user
@@ -37,6 +37,6 @@ def topic_detail(request, pk, slug):
             comment.save()
             return redirect('discuss:topic', pk=pk, slug=slug)
     else:
-        form = CommentForm(topic=topic, user=request.user)
+        form = CommentForm()
 
     return render(request, 'discuss/topic_detail.html', {'topic': topic, 'form': form})
