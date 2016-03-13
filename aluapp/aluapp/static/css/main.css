@@ -51,13 +51,32 @@ form {
   border-bottom: 1px solid #eee;
 }
 .alu-table tbody tr td.post-title {
-  width: 94.2%;
+  width: 92.3%;
 }
-.alu-table tbody tr td.date-created {
+.alu-table tbody tr td.date-created, .topic .date-created {
   cursor: default;
+}
+.topic .date-created {
+  text-align: right;
 }
 .new-topic {
   display: inline-block;
   margin-left: 85%;
   font-size: 60%;
+}
+.topic {
+  margin-bottom: 20px;
+  min-height: 250px;
+}
+.topic .name {
+  margin-bottom: 1em;
+}
+.pic {
+  height: 5em;
+  width: 5em;
+  background: #ddd;
+  border-radius: 50%;
+}
+.comment-form {
+  background: #ff0;
 }

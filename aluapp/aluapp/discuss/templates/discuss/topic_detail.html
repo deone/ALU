@@ -1,5 +1,7 @@
 {% extends 'discuss/index.html' %}
 
+{% load humanize %}
+
 {% load comments %}
 
 {% block discuss_page_title %}&mdash; {{ topic.title }}{% endblock %}
@@ -12,17 +14,23 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-4" style="background: #ff0; height: 2em; border: solid 1px #eee;"></div>
-    <div class="col-md-4" style="background: #ff0; height: 2em; border: solid 1px #eee;"></div>
-    <div class="col-md-4" style="background: #ff0; height: 2em; border: solid 1px #eee;"></div>
-    {{ topic.user.username }}
-    {{ topic.user.get_full_name }}
-    {{ topic.comment }}
+  <div class="topic row">
+    <div class="col-md-2 pull-left">
+      <p class="name">{{ topic.user.get_full_name }}</p>
+      <div class="pic"></div>
+    </div>
+    <div class="col-md-8">
+      {{ topic.comment | safe }}
+    </div>
+    <div class="col-md-2">
+      <p class="date-created" title="{{ topic.date_created }}"><i class="fa fa-clock-o"></i> {{ topic.date_created | naturalday }}</p>
+    </div>
   </div>
 
   <div class="row">
-    {% render_comment_form for topic %}
+    <div class="comment-form">
+      {% render_comment_form for topic %}
+    </div>
   </div>
 </div>
 {% endblock %}
