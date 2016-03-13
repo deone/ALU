@@ -3,6 +3,8 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+from utils import AutoSlugField
+
 class UserType(models.Model):
     STAFF = 'STF'
     STUDENT = 'STD'
@@ -33,7 +35,7 @@ class Common(models.Model):
     title = models.CharField(max_length=200)
     body = models.TextField()
     date_created = models.DateTimeField(default=timezone.now)
-    slug = models.SlugField(unique=True, editable=False)
+    slug = AutoSlugField(populate_from="title", db_index=False, blank=True, editable=False)
 
     class Meta:
         abstract = True
@@ -43,10 +45,6 @@ class Common(models.Model):
         return self.title
 
 class Announcement(Common):
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(Announcement, self).save(*args, **kwargs)
 
     @models.permalink
     def get_absolute_url(self):
@@ -61,10 +59,6 @@ class DocumentType(models.Model):
 class DocumentRequest(Common):
     document_type = models.ForeignKey(DocumentType)
     upload_quantity = models.PositiveSmallIntegerField()
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(DocumentRequest, self).save(*args, **kwargs)
 
     @models.permalink
     def get_absolute_url(self):
