@@ -51,7 +51,7 @@ class Announcement(Common):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'app:announcement', (self.slug,)
+        return 'app:announcement', (self.id, self.slug,)
 
 class DocumentType(models.Model):
     document_type = models.CharField(max_length=50)
@@ -64,7 +64,7 @@ class DocumentRequest(Common):
 
     @models.permalink
     def get_absolute_url(self):
-        return 'app:document_request', (self.slug,)
+        return 'app:document_request', (self.id, self.slug,)
 
     def __str__(self):
         return self.title

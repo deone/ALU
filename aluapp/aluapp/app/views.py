@@ -1,4 +1,4 @@
-from django.shortcuts import render, render_to_response, redirect
+from django.shortcuts import render, render_to_response, redirect, get_object_or_404
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
@@ -56,12 +56,12 @@ def post_announcement(request):
 # @login_required
 class AnnouncementDetail(DetailView):
     model = Announcement
-    context_object_name = 'announcement'
+    context_object_name = 'object_detail'
 
-# @login_required
-class DocRequestDetail(DetailView):
-    model = DocumentRequestForm
-    context_object_name = 'document_request'
+@login_required
+def document_request_detail(request, pk, slug):
+    doc_request = get_object_or_404(DocumentRequest, pk=pk)
+    return render(request, 'app/documentrequest_detail.html', {'object_detail': doc_request})
 
 @login_required
 def post_doc_request(request):
