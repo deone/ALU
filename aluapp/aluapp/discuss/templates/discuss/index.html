@@ -4,6 +4,11 @@
 
 {% block page_title %}&mdash; Discuss {% block discuss_page_title %}{% endblock %}{% endblock %}
 
+{% block extra_js %}
+<script src="http://cdn.tinymce.com/4/tinymce.min.js"></script>
+<script>tinymce.init({ selector: 'textarea' });</script>
+{% endblock %}
+
 {% block app_body %}
 <div class="mid width-90">
   <div class="row">

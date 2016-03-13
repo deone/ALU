@@ -31,6 +31,21 @@
       <div class="pic"></div>
     </div>
     <div class="col-md-10">
+      <form action="" method="post">
+        <fieldset>
+
+          {% csrf_token %}
+          {{ form.non_field_errors }}
+
+          <div class="form-group">
+            {{ form.comment.errors }}
+            <label for="{{ form.comment.id_for_label }}">{{ form.comment.label }}</label>
+            {{ form.comment }}
+          </div>
+
+          <button type="submit" class="btn btn-primary">Publish</button>
+        </fieldset>
+      </form>
     </div>
   </div>
 </div>
