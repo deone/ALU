@@ -71,7 +71,7 @@ def post_document_request(request):
             doc_request = form.save()
             email_students(doc_request)
             messages.success(request, 'Document request posted successfully.')
-            return redirect('app:post_doc_request')
+            return redirect('app:post_document_request')
     else:
         form = DocumentRequestForm()
 
