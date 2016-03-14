@@ -69,7 +69,8 @@ def document_request_detail(request, pk, slug):
             document.user = request.user
             document.document_request = document_request
             document.save()
-            return redirect('app:document_request')
+            messages.success(request, 'Document uploaded successfully.')
+            return redirect('app:document_request', pk=pk, slug=slug)
     else:
         form = DocumentForm()
 
