@@ -1,0 +1,49 @@
+<ul class="nav navbar-nav">
+  {% if user.is_authenticated and user.usertype.user_type %}
+    <li>
+      <a href="{% url 'home' %}">
+        <span class="glyphicon glyphicon-list" aria-hidden="true"></span>
+        {% if user.usertype.user_type == 'STD' %}
+        News Feed
+        {% endif %}
+        {% if user.usertype.user_type == 'STF' %}
+        Dashboard
+        {% endif %}
+      </a>
+    </li>
+    {% with type=user.usertype.user_type %}
+      {% if type == 'STF' %}
+        <li>
+          <a href="{% url 'app:import_list' %}">
+            <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+            Import Student List
+          </a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+            Post <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'app:post_announcement' %}">Announcement</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="{% url 'app:post_document_request' %}">Document Request</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">
+            <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+            Download
+          </a>
+        </li>
+      {% endif %}
+    {% endwith %}
+
+    <li>
+      <a href="{% url 'discuss:topics' %}">
+        <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+        Discuss
+      </a>
+    </li>
+  {% endif %}
+</ul>

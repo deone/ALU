@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>News Feed</h1>
+</div>
+
+{% if announcements %}
+  <h2>Announcements</h2>
+  {% for an in announcements %}
+    <p><a href="{{ an.get_absolute_url }}">{{ an }}</a></p>
+  {% endfor %}
+{% endif %}
+
+{% if document_requests %}
+  <h2>Document Requests</h2>
+  {% for dr in document_requests %}
+    <p><a href="{{ dr.get_absolute_url }}">{{ dr }}</a></p>
+  {% endfor %}
+{% endif %}
