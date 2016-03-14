@@ -60,6 +60,7 @@ class DocumentType(models.Model):
         return self.document_type
 
 class DocumentRequest(Common):
+    document_type = models.ForeignKey(DocumentType)
     upload_quantity = models.PositiveSmallIntegerField('Number Of Files Allowed')
 
     @models.permalink
@@ -74,8 +75,7 @@ class DocumentRequest(Common):
 
 class Document(models.Model):
     user = models.ForeignKey(User)
-    document_type = models.ForeignKey(DocumentType)
-    doc_request = models.ForeignKey(DocumentRequest)
+    document_request = models.ForeignKey(DocumentRequest)
     document = models.FileField()
     date_submitted = models.DateTimeField(default=timezone.now, editable=False)
 
