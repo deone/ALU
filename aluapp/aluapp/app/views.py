@@ -63,7 +63,13 @@ def document_request_detail(request, pk, slug):
     document_request = get_object_or_404(DocumentRequest, pk=pk)
 
     if request.method == 'POST':
-        form = DocumentRequest(request.POST, request.FILES)
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            document = form.save(commit=False)
+            document.user = request.user
+            document.document_request = document_request
+            document.save()
+            return redirect('app:document_request')
     else:
         form = DocumentForm()
 
