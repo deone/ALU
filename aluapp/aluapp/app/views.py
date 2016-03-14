@@ -66,6 +66,8 @@ def document_request_detail(request, pk, slug):
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
             document = form.save(commit=False)
+            doc_name = document.document.name
+            document.document.name = document_request.document_type.document_type + '_' + doc_name
             document.user = request.user
             document.document_request = document_request
             document.save()
