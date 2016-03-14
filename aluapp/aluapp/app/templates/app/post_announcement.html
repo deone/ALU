@@ -25,13 +25,13 @@
           {{ form.title }}
         </div>
 
+        {% block extra_fields %}{% endblock %}
+
         <div class="form-group">
           {{ form.body.errors }}
           <label for="{{ form.body.id_for_label }}">{{ form.body.label }}</label>
           {{ form.body }}
         </div>
-
-        {% block extra_fields %}{% endblock %}
         
         <button type="submit" class="btn btn-primary">Post</button>
       </fieldset>
