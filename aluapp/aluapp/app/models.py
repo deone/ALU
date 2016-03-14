@@ -59,6 +59,9 @@ class DocumentType(models.Model):
     def __str__(self):
         return self.document_type
 
+    class Meta:
+        verbose_name_plural = 'Document Types'
+
 class DocumentRequest(Common):
     document_type = models.ForeignKey(DocumentType)
     upload_quantity = models.PositiveSmallIntegerField('Number Of Files Allowed')
