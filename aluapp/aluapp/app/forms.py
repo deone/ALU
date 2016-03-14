@@ -43,6 +43,8 @@ class DocumentRequestForm(forms.ModelForm):
         super(DocumentRequestForm, self).__init__(*args, **kwargs)
         self.fields['title'].widget = forms.TextInput(attrs={'class': 'form-control'})
         self.fields['document_type'].widget = forms.Select(attrs={'class': 'form-control'})
+        self.fields['document_type'].label = 'Document Type'
+        self.fields['document_type'].choices = get_list(DocumentType)
         self.fields['upload_quantity'].widget = forms.TextInput(attrs={'class': 'form-control'})
 
 """ class DocumentForm(forms.ModelForm):
