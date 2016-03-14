@@ -60,8 +60,14 @@ class AnnouncementDetail(DetailView):
 
 @login_required
 def document_request_detail(request, pk, slug):
-    doc_request = get_object_or_404(DocumentRequest, pk=pk)
-    return render(request, 'app/documentrequest_detail.html', {'object_detail': doc_request})
+    document_request = get_object_or_404(DocumentRequest, pk=pk)
+
+    if request.method == 'POST':
+        form = DocumentRequest(request.POST, request.FILES)
+    else:
+        form = DocumentForm()
+
+    return render(request, 'app/documentrequest_detail.html', {'object_detail': document_request, 'form': form})
 
 @login_required
 def post_document_request(request):

@@ -1,3 +1,26 @@
 {% extends 'app/announcement_detail.html' %}
 
 {% block page_title %}&mdash; Document Requests &mdash; {{ object_detail.title }}{% endblock %}
+
+{% block extra_app_body %}
+<div class="row">
+  <form action="" method="post" enctype="multipart/form-data">
+    <fieldset>
+      <div class="page-header">
+        <h1>Upload Document</h1>
+      </div>
+
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="form-group">
+        {{ form.document.errors }}
+        <label for="{{ form.document.id_for_label }}">{{ form.document.label }}</label>
+        {{ form.document }}
+      </div>
+
+        <button type="submit" class="btn btn-primary">Import</button>
+    </fieldset>
+  </form>
+</div>
+{% endblock %}

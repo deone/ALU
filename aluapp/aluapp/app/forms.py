@@ -47,7 +47,7 @@ class DocumentRequestForm(forms.ModelForm):
         self.fields['document_type'].choices = get_list(DocumentType)
         self.fields['upload_quantity'].widget = forms.TextInput(attrs={'class': 'form-control'})
 
-""" class DocumentForm(forms.ModelForm):
+class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = ['doc'] """
+        fields = ['document']
