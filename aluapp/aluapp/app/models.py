@@ -79,8 +79,8 @@ class DocumentRequest(Common):
 class Document(models.Model):
     user = models.ForeignKey(User)
     document_request = models.ForeignKey(DocumentRequest)
-    document = models.FileField()
+    document = models.FileField(upload_to='documents/%d-%m-%Y')
     date_submitted = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
-        return "%s %s" % (self.user.get_full_name(), self.document_type.document_type)
+        return "%s %s" % (self.user.get_full_name(), self.document_request.document_type)

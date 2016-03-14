@@ -151,4 +151,6 @@ EMAIL_HOST_PASSWORD = '@dune369'
 
 SITE_ID = 1
 
+MEDIA_ROOT = '/Users/deone/uploads/aluapp/'
+
 from config import *
