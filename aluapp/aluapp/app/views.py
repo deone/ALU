@@ -70,7 +70,7 @@ def document_request_detail(request, pk, slug):
             document.document_request = document_request
             document.save()
             messages.success(request, 'Document uploaded successfully.')
-            return redirect('app:document_request', pk=pk, slug=slug)
+            return redirect('home')
     else:
         form = DocumentForm()
 
