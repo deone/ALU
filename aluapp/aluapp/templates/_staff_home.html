@@ -11,16 +11,24 @@
   {% for doc_type in document_types %}
     <div class="col-md-3">
       <div class="document">
-        <div style="margin-bottom: 10px;">
+        <div class="icon-name">
           <i class="fa fa-file-pdf-o fa-2x pull-left"></i>
           <div class="pull-right">
-            {{ doc_type.name }}
+            {{ doc_type.name }}<br>
           </div>
           <div style="clear: both;"></div>
         </div>
         <ul>
-          <li><a href="#">Today - {{ doc_type.today_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a></li>
-          <li><a href="#">Total - {{ doc_type.total_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a></li>
+          <li>
+            <a href="{% url 'app:document_type_download' doc_type.id doc_type.year doc_type.month doc_type.day %}">
+              Today - {{ doc_type.today_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'app:document_type_download_all' doc_type.id %}">
+              Total - {{ doc_type.total_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

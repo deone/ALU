@@ -40,6 +40,9 @@ form {
   padding: 1em;
   border-radius: 5px;
 }
+.document .icon-name {
+  margin-bottom: 10px;
+}
 .document ul {
   font-size: 80%;
   list-style: none;
@@ -47,11 +50,14 @@ form {
   padding: 0;
 }
 .document ul li {
-  background: #fafafa;
+  background: #f5f5f5;
   text-align: right;
   display: block;
   width: 100%;
   padding: .1em .4em;
+}
+.document ul li:hover {
+  background: #eee;
 }
 .document ul li:first-child {
   margin-bottom: 10px;

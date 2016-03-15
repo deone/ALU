@@ -35,6 +35,9 @@ def home(request):
         dct['today_count'] = doc_type.document_set.filter(
             date_submitted__gt=datetime.date(now.year, now.month, now.day - 1), date_submitted__lt=datetime.date(now.year, now.month, now.day + 1)
             ).count()
+        dct['year'] = now.year
+        dct['month'] = now.month
+        dct['day'] = now.day
         dct['total_count'] = doc_type.document_set.count()
         doc_type_list.append(dct)
 
@@ -110,6 +113,14 @@ def post_document_request(request):
         form = DocumentRequestForm()
 
     return render(request, 'app/post_document_request.html', {'form': form})
+
+@login_required
+def download(request, doc_type_id, year, month, day):
+    print doc_type_id, year, month, day
+
+@login_required
+def download_all(request, doc_type_id):
+    print doc_type_id
 
 def logout(request):
     auth_logout(request)
