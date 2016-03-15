@@ -18,7 +18,7 @@ def new_topic(request):
             topic = form.save(commit=False)
             topic.user = request.user
             topic.save()
-            return redirect('discuss:new_topic')
+            return redirect('discuss:topics')
     else:
         form = NewTopicForm()
 
