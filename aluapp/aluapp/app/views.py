@@ -26,12 +26,15 @@ def home(request):
     document_types = DocumentType.objects.all()
 
     doc_type_list = []
+    now = timezone.now()
+
     for doc_type in document_types:
         dct = {}
-        now = timezone.now()
         dct['id'] = doc_type.pk
         dct['name'] = doc_type.document_type
-        dct['today_count'] = doc_type.document_set.filter(date_submitted=datetime.date(now.year, now.month, now.day)).count()
+        dct['today_count'] = doc_type.document_set.filter(
+            date_submitted__gt=datetime.date(now.year, now.month, now.day - 1), date_submitted__lt=datetime.date(now.year, now.month, now.day + 1)
+            ).count()
         dct['total_count'] = doc_type.document_set.count()
         doc_type_list.append(dct)
 

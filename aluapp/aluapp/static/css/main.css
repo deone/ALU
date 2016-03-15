@@ -96,10 +96,8 @@ form {
 .alu-table tbody tr td.post-title {
   width: 92.3%;
 }
-.alu-table tbody tr td.date-created, .topic .date-created {
+.date-created {
   cursor: default;
-}
-.alu-table tbody tr td.date-created {
   text-transform: capitalize;
 }
 .topic .date-created {
