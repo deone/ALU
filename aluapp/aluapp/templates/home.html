@@ -9,15 +9,13 @@
 {% block app_body %}
 <div class="mid width-90">
   {% include '_login.html' %}
-  <div class="row">
-    {% if user.is_authenticated and user.usertype.user_type %}
-      {% if user.usertype.user_type == 'STD' %}
-        {% include '_student_home.html' %}
-      {% endif %}
-      {% if user.usertype.user_type == 'STF' %}
-        {% include '_staff_home.html' %}
-      {% endif %}
+  {% if user.is_authenticated and user.usertype.user_type %}
+    {% if user.usertype.user_type == 'STD' %}
+      {% include '_student_home.html' %}
     {% endif %}
-  </div>
+    {% if user.usertype.user_type == 'STF' %}
+      {% include '_staff_home.html' %}
+    {% endif %}
+  {% endif %}
 </div>
 {% endblock %}
