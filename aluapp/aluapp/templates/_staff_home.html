@@ -14,13 +14,13 @@
         <div style="margin-bottom: 10px;">
           <i class="fa fa-file-pdf-o fa-2x pull-left"></i>
           <div class="pull-right">
-            {{ doc_type.document_type }}
+            {{ doc_type.name }}
           </div>
           <div style="clear: both;"></div>
         </div>
         <ul>
-          <li><a href="#">Today - 20 <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a></li>
-          <li><a href="#">Total - 200 <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a></li>
+          <li><a href="#">Today - {{ doc_type.today_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a></li>
+          <li><a href="#">Total - {{ doc_type.total_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a></li>
         </ul>
       </div>
     </div>
@@ -29,7 +29,7 @@
   {% endfor %}
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <div class="page-header">
     <h1>
       <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
@@ -55,4 +55,4 @@
     <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
     Download All Documents
   </a>
-</div>
+</div> -->

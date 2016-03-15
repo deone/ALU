@@ -4,10 +4,13 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
 from django.contrib import messages
 from django.conf import settings
+from django.utils import timezone
 
 from .forms import *
 from .models import *
 from .helpers import *
+
+import datetime
 
 def home(request):
     if request.method == 'POST':
@@ -22,12 +25,21 @@ def home(request):
     document_requests = DocumentRequest.objects.all()
     document_types = DocumentType.objects.all()
 
+    doc_type_list = []
+    for doc_type in document_types:
+        dct = {}
+        now = timezone.now()
+        dct['id'] = doc_type.pk
+        dct['name'] = doc_type.document_type
+        dct['today_count'] = doc_type.document_set.filter(date_submitted=datetime.date(now.year, now.month, now.day)).count()
+        dct['total_count'] = doc_type.document_set.count()
+        doc_type_list.append(dct)
 
     return render(request, 'home.html', {
       'form': form,
       'announcements': announcements,
       'document_requests': document_requests,
-      'document_types': document_types,
+      'document_types': doc_type_list,
       })
 
 @login_required
