@@ -1,11 +1,58 @@
 <div class="row">
   <div class="page-header">
-    <h1>Dashboard</h1>
+    <h1>
+      <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+      Documents
+    </h1>
   </div>
+</div>
 
+<div class="documents row">
   {% for doc_type in document_types %}
-    <p>{{ doc_type }} - {{ doc_type.document_set.count }}</p>
+    <div class="col-md-3">
+      <div class="document">
+        <div style="margin-bottom: 10px;">
+          <i class="fa fa-file-pdf-o fa-2x pull-left"></i>
+          <div class="pull-right">
+            {{ doc_type.document_type }}
+          </div>
+          <div style="clear: both;"></div>
+        </div>
+        <ul>
+          <li><a href="#">Today - 20 <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a></li>
+          <li><a href="#">Total - 200 <span class="glyphicon glyphicon-download" aria-hidden="true"></span></a></li>
+        </ul>
+      </div>
+    </div>
   {% empty %}
     <p>There are no submissions. Yet.</p>
   {% endfor %}
+</div>
+
+<div class="row">
+  <div class="page-header">
+    <h1>
+      <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+      Download Document By Date</h1>
+  </div>
+  <form style="background: #ff0;">
+  </form>
+</div>
+
+<div class="row">
+  <div class="page-header">
+    <h1>
+      <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
+      Copy Documents to Google Drive
+    </h1>
+  </div>
+  <form style="background: #ff0;">
+  </form>
+</div>
+
+<div class="download-all row">
+  <a href="#" class="col-md-12 btn btn-success btn-lg" role="button">
+    <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+    Download All Documents
+  </a>
 </div>

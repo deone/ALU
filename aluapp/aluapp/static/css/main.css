@@ -23,8 +23,48 @@ html, body {
 form {
   padding-bottom: 3em;
 }
+
+/* Home Page */
 .feed h2 {
   font-size: 125%;
+}
+.documents {
+  margin-top: 10px;
+}
+.document {
+  border: solid 1px #eee;
+  margin-bottom: 30px;
+  padding: 1em;
+  border-radius: 5px;
+}
+.document ul {
+  font-size: 80%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.document ul li {
+  background: #fafafa;
+  text-align: right;
+  display: block;
+  width: 100%;
+  padding: .1em .4em;
+}
+.document ul li:first-child {
+  margin-bottom: 10px;
+}
+
+.documents a {
+  /* height: 150px; */
+  display: block;
+}
+.download-all {
+  margin-top: 70px;
+  margin-bottom: 50px;
+}
+.download-all a {
+  font-weight: bold;
+  font-size: 150%;
 }
 
 /* Messages */
@@ -56,6 +96,9 @@ form {
 .alu-table tbody tr td.date-created, .topic .date-created {
   cursor: default;
 }
+.alu-table tbody tr td.date-created {
+  text-transform: capitalize;
+}
 .topic .date-created {
   text-align: right;
 }
@@ -82,8 +125,6 @@ form {
   letter-spacing: .05em;
   word-spacing: .1em;
   font-size: 90%;
-}
-.comment-form {
 }
 
 /* Announcement */
