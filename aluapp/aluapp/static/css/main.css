@@ -25,6 +25,9 @@ form {
 }
 
 /* Home Page */
+.plus-spacer {
+  margin-right: .3em;
+}
 .feed h2 {
   font-size: 125%;
 }
@@ -104,7 +107,7 @@ form {
 }
 .new-topic {
   display: inline-block;
-  margin-left: 85%;
+  margin-left: 80.4%;
   font-size: 60%;
 }
 .topic, .comment {
