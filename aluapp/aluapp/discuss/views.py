@@ -7,7 +7,7 @@ from .forms import NewTopicForm, CommentForm
 
 @login_required
 def index(request):
-    topics = Topic.objects.filter(user=request.user)
+    topics = Topic.objects.all()
     return render(request, 'discuss/index.html', {'topics': topics})
 
 @login_required
