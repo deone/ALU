@@ -19,12 +19,15 @@ def home(request):
         form = UserTypeForm(user=request.user)
 
     announcements = Announcement.objects.all()
-    doc_requests = DocumentRequest.objects.all()
+    document_requests = DocumentRequest.objects.all()
+    document_types = DocumentType.objects.all()
+
 
     return render(request, 'home.html', {
       'form': form,
       'announcements': announcements,
-      'document_requests': doc_requests,
+      'document_requests': document_requests,
+      'document_types': document_types,
       })
 
 @login_required
