@@ -20,14 +20,22 @@
         </div>
         <ul>
           <li>
-            <a href="{% url 'app:document_type_download' doc_type.id doc_type.year doc_type.month doc_type.day %}">
+            {% if doc_type.today_count == 0 %}
               Today - {{ doc_type.today_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
-            </a>
+            {% else %}
+              <a href="{% url 'app:document_type_download' doc_type.id doc_type.year doc_type.month doc_type.day %}">
+                Today - {{ doc_type.today_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+              </a>
+            {% endif %}
           </li>
           <li>
-            <a href="{% url 'app:document_type_download_all' doc_type.id %}">
+            {% if doc_type.total_count == 0 %}
               Total - {{ doc_type.total_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
-            </a>
+            {% else %}
+              <a href="{% url 'app:document_type_download_all' doc_type.id %}">
+                Total - {{ doc_type.total_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
+              </a>
+            {% endif %}
           </li>
         </ul>
       </div>
