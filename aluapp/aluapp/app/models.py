@@ -2,8 +2,16 @@ from django.db import models
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.conf import settings
 
 from utils import AutoSlugField
+
+import os
+
+def get_upload_path(instance, filename):
+    document_type = instance.document_request.document_type.document_type
+    directory = document_type.replace(' ', '_')
+    return os.path.join('%s/documents/%s/' % (settings.MEDIA_ROOT, directory), filename)
 
 class UserType(models.Model):
     STAFF = 'STF'
@@ -80,7 +88,8 @@ class Document(models.Model):
     user = models.ForeignKey(User)
     document_type = models.ForeignKey(DocumentType)
     document_request = models.ForeignKey(DocumentRequest)
-    document = models.FileField(upload_to='documents/%d-%m-%Y')
+    # document = models.FileField(upload_to='documents/%d-%m-%Y')
+    document = models.FileField(upload_to=get_upload_path)
     date_submitted = models.DateTimeField(default=timezone.now, editable=False)
 
     def __str__(self):
