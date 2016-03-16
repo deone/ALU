@@ -106,7 +106,7 @@ def build_doc_type_lst(lst):
         dct['id'] = doc_type.pk
         dct['name'] = doc_type.document_type
         dct['today_count'] = doc_type.document_set.filter(
-            date_submitted__gt=datetime.date(now.year, now.month, now.day - 1), date_submitted__lt=datetime.date(now.year, now.month, now.day + 1)
+            date_submitted__gt=datetime.date(now.year, now.month, now.day), date_submitted__lt=datetime.date(now.year, now.month, now.day + 1)
             ).count()
         dct['year'] = now.year
         dct['month'] = now.month
