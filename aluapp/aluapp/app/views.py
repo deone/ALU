@@ -114,12 +114,20 @@ def post_document_request(request):
     return render(request, 'app/post_document_request.html', {'form': form})
 
 @login_required
-def download(request, doc_type_id, year, month, day):
+def download_today_doc_type(request, doc_type_id, year, month, day):
     print doc_type_id, year, month, day
 
 @login_required
-def download_all(request, doc_type_id):
+def download_all_doc_type(request, doc_type_id):
     print doc_type_id
+
+@login_required
+def download_doc_type_by_date_range(request):
+    pass
+
+@login_required
+def download_all(request):
+    pass
 
 def logout(request):
     auth_logout(request)

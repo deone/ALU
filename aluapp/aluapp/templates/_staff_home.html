@@ -23,7 +23,7 @@
             {% if doc_type.today_count == 0 %}
               Today - {{ doc_type.today_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
             {% else %}
-              <a href="{% url 'app:document_type_download' doc_type.id doc_type.year doc_type.month doc_type.day %}">
+              <a href="{% url 'app:download_today_doc_type' doc_type.id doc_type.year doc_type.month doc_type.day %}">
                 Today - {{ doc_type.today_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
               </a>
             {% endif %}
@@ -32,7 +32,7 @@
             {% if doc_type.total_count == 0 %}
               Total - {{ doc_type.total_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
             {% else %}
-              <a href="{% url 'app:document_type_download_all' doc_type.id %}">
+              <a href="{% url 'app:download_all_doc_type' doc_type.id %}">
                 Total - {{ doc_type.total_count }} <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
               </a>
             {% endif %}
@@ -45,7 +45,7 @@
   {% endfor %}
 </div>
 
-<!-- <div class="row">
+<div class="row">
   <div class="page-header">
     <h1>
       <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
@@ -55,7 +55,7 @@
   </form>
 </div>
 
-<div class="row">
+<!-- <div class="row">
   <div class="page-header">
     <h1>
       <span class="glyphicon glyphicon-cloud-upload" aria-hidden="true"></span>
@@ -64,11 +64,11 @@
   </div>
   <form style="background: #ff0;">
   </form>
-</div>
+</div> -->
 
 <div class="download-all row">
-  <a href="#" class="col-md-12 btn btn-success btn-lg" role="button">
+  <a href="{% url 'app:download_all' %}" class="col-md-12 btn btn-success btn-lg" role="button">
     <span class="glyphicon glyphicon-download" aria-hidden="true"></span>
     Download All Documents
   </a>
-</div> -->
+</div>
