@@ -5,12 +5,16 @@ from django.views.generic import DetailView
 from django.contrib import messages
 from django.conf import settings
 from django.utils import timezone
+from django.http import HttpResponse
 
 from .forms import *
 from .models import *
 from .helpers import *
 
+from utils import zipdir
+
 import datetime
+import os
 
 def home(request):
     if request.method == 'POST':
@@ -127,7 +131,15 @@ def download_doc_type_by_date_range(request):
 
 @login_required
 def download_all(request):
-    pass
+    _file = zipdir(settings.MEDIA_ROOT, 'documents')
+
+    zip_file = open(_file.filename, 'r')
+    response = HttpResponse(zip_file, content_type='application/force-download')
+    response['Content-Disposition'] = 'attachment; filename="%s"' % _file.filename
+
+    os.remove(_file.filename)
+
+    return response
 
 def logout(request):
     auth_logout(request)

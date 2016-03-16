@@ -11,6 +11,9 @@ from django.conf import settings
 
 __all__ = ['AutoSlugField', ]
 
+import os
+import zipfile
+
 
 class AutoSlugField(SlugField):
     """
@@ -74,3 +77,16 @@ def get_list(klass):
         lst.append(tup)
 
     return lst
+
+def zipdir(src, dst):
+    zf = zipfile.ZipFile('%s.zip' % dst, 'w', zipfile.ZIP_DEFLATED)
+    abs_src = os.path.abspath(src)
+    for dirname, subdirs, files in os.walk(src):
+        for filename in files:
+            absname = os.path.abspath(os.path.join(dirname, filename))
+            arcname = absname[len(abs_src) + 1:]
+            print 'zipping %s as %s' % (os.path.join(dirname, filename), arcname)
+            zf.write(absname, arcname)
+
+    zf.close()
+    return zf
