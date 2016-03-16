@@ -53,8 +53,8 @@ def home(request):
       'document_types': doc_type_list,
       })
 
-@must_be_staff
 @login_required
+@must_be_staff
 def import_list(request):
     if request.method == 'POST':
         form = ImportForm(request.POST, request.FILES)
@@ -66,8 +66,8 @@ def import_list(request):
 
     return render(request, 'app/import_list.html', {'form': form})
 
-@must_be_staff
 @login_required
+@must_be_staff
 def post_announcement(request):
     if request.method == 'POST':
         form = AnnouncementForm(request.POST)
@@ -81,16 +81,15 @@ def post_announcement(request):
 
     return render(request, 'app/post_announcement.html', {'form': form})
 
-# @login_required
+decorators = [login_required, must_be_student]
+
+@method_decorator(decorators, name='dispatch')
 class AnnouncementDetail(DetailView):
     model = Announcement
     context_object_name = 'object_detail'
 
-    def dispatch(self, *args, **kwargs):
-        pass
-
-@must_be_student
 @login_required
+@must_be_student
 def document_request_detail(request, pk, slug):
     document_request = get_object_or_404(DocumentRequest, pk=pk)
 
@@ -110,8 +109,8 @@ def document_request_detail(request, pk, slug):
 
     return render(request, 'app/documentrequest_detail.html', {'object_detail': document_request, 'form': form})
 
-@must_be_staff
 @login_required
+@must_be_staff
 def post_document_request(request):
     if request.method == 'POST':
         form = DocumentRequestForm(request.POST)
@@ -137,8 +136,8 @@ def download_all_doc_type(request, doc_type_id):
 def download_doc_type_by_date_range(request):
     pass
 
-@must_be_staff
 @login_required
+@must_be_staff
 def download_all(request):
     _file = zipdir(settings.MEDIA_ROOT, 'documents')
 
