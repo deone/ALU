@@ -7,11 +7,11 @@ from django.conf import settings
 from django.utils import timezone
 from django.http import HttpResponse
 
+from aluapp.decorators import *
+from utils import zipdir
 from .forms import *
 from .models import *
 from .helpers import *
-
-from utils import zipdir
 
 import datetime
 import os
@@ -52,6 +52,7 @@ def home(request):
       'document_types': doc_type_list,
       })
 
+@must_be_staff
 @login_required
 def import_list(request):
     if request.method == 'POST':
@@ -64,6 +65,7 @@ def import_list(request):
 
     return render(request, 'app/import_list.html', {'form': form})
 
+@must_be_staff
 @login_required
 def post_announcement(request):
     if request.method == 'POST':
@@ -83,6 +85,7 @@ class AnnouncementDetail(DetailView):
     model = Announcement
     context_object_name = 'object_detail'
 
+@must_be_student
 @login_required
 def document_request_detail(request, pk, slug):
     document_request = get_object_or_404(DocumentRequest, pk=pk)
@@ -103,6 +106,7 @@ def document_request_detail(request, pk, slug):
 
     return render(request, 'app/documentrequest_detail.html', {'object_detail': document_request, 'form': form})
 
+@must_be_staff
 @login_required
 def post_document_request(request):
     if request.method == 'POST':
@@ -129,6 +133,7 @@ def download_all_doc_type(request, doc_type_id):
 def download_doc_type_by_date_range(request):
     pass
 
+@must_be_staff
 @login_required
 def download_all(request):
     _file = zipdir(settings.MEDIA_ROOT, 'documents')
@@ -140,6 +145,9 @@ def download_all(request):
     os.remove(_file.filename)
 
     return response
+
+def mail_staff(request):
+    pass
 
 def logout(request):
     auth_logout(request)
