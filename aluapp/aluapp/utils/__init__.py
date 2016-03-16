@@ -12,11 +12,13 @@ from django.conf import settings
 from django.core.mail import EmailMultiAlternatives
 from django.contrib.sites.models import Site
 from django.template import loader
-
-__all__ = ['AutoSlugField', ]
+from django.utils import timezone
 
 import os
 import zipfile
+import datetime
+
+__all__ = ['AutoSlugField', ]
 
 
 class AutoSlugField(SlugField):
@@ -95,18 +97,42 @@ def zipdir(src, dst):
     zf.close()
     return zf
 
-def make_context(obj):
+def build_doc_type_lst(lst):
+    now = timezone.now()
+
+    doc_type_list = []
+    for doc_type in lst:
+        dct = {}
+        dct['id'] = doc_type.pk
+        dct['name'] = doc_type.document_type
+        dct['today_count'] = doc_type.document_set.filter(
+            date_submitted__gt=datetime.date(now.year, now.month, now.day - 1), date_submitted__lt=datetime.date(now.year, now.month, now.day + 1)
+            ).count()
+        dct['year'] = now.year
+        dct['month'] = now.month
+        dct['day'] = now.day
+        dct['total_count'] = doc_type.document_set.count()
+        doc_type_list.append(dct)
+
+    return doc_type_list
+
+def make_context(obj=None, lst=None):
     current_site = Site.objects.get_current()
+    context = {'site_name': current_site.name}
 
-    return {
-        'domain': current_site.domain,
-        'obj': obj,
-        'type': obj.object_type,
-        'site_name': current_site.name,
-        'protocol': 'http',
-    }
+    if obj is not None:
+        context.update({
+            'domain': current_site.domain,
+            'obj': obj,
+            'type': obj.object_type,
+            'protocol': 'http',
+        })
+    else:
+        context.update({'document_types': build_doc_type_lst(lst)})
 
-def create_email(obj=None):
+    return context
+
+def create_email(user_type, obj=None, lst=None):
     if obj is not None:
         if obj.object_type == 'announcement':
             subject = 'New Announcement: %s' % obj.title
@@ -114,12 +140,13 @@ def create_email(obj=None):
             subject = 'New Document Request: %s' % obj.title
         email_template = 'app/emails/student.html'
         body = loader.render_to_string(email_template, make_context(obj))
-        to = [user.email for user in User.objects.filter(usertype__user_type='STD')]
     else:
         # Mail staff
-        context = {}
-        to = []
+        subject = 'Document Submissions Summary For Today'
+        email_template = 'app/emails/staff.html'
+        body = loader.render_to_string(email_template, make_context(obj=None, lst=lst))
 
+    to = [user.email for user in User.objects.filter(usertype__user_type=user_type)]
     return {
           'subject': subject,
           'body': body,

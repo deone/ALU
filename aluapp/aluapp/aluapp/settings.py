@@ -153,4 +153,6 @@ SITE_ID = 1
 
 MEDIA_ROOT = '/Users/deone/uploads/aluapp/'
 
+FROM_EMAIL = 'no-reply@alu.com'
+
 from config import *
