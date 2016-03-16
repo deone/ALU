@@ -2,12 +2,13 @@ from django.shortcuts import render, render_to_response, redirect, get_object_or
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView
+from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.conf import settings
 from django.utils import timezone
 from django.http import HttpResponse
 
-from aluapp.decorators import *
+from utils.decorators import *
 from utils import zipdir
 from .forms import *
 from .models import *
@@ -84,6 +85,9 @@ def post_announcement(request):
 class AnnouncementDetail(DetailView):
     model = Announcement
     context_object_name = 'object_detail'
+
+    def dispatch(self, *args, **kwargs):
+        pass
 
 @must_be_student
 @login_required
