@@ -13,4 +13,5 @@ urlpatterns = [
     url(r'^import_list/$', views.import_list, name='import_list'),
     url(r'^post_announcement/$', views.post_announcement, name='post_announcement'),
     url(r'^post_document_request/$', views.post_document_request, name='post_document_request'),
+    url(r'^mail_staff/$', views.mail_staff, name='mail_staff'),
 ]

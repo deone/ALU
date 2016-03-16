@@ -9,10 +9,9 @@ from django.utils import timezone
 from django.http import HttpResponse
 
 from utils.decorators import *
-from utils import zipdir
+from utils import zipdir, create_email, send_email
 from .forms import *
 from .models import *
-from .helpers import *
 
 import datetime
 import os
@@ -73,7 +72,10 @@ def post_announcement(request):
         form = AnnouncementForm(request.POST)
         if form.is_valid():
             announcement = form.save()
-            email_students(announcement)
+
+            params = create_email(obj=announcement)
+            send_email(params['subject'], params['body'], params['to'])
+
             messages.success(request, 'Announcement posted successfully.')
             return redirect('app:post_announcement')
     else:
@@ -116,7 +118,10 @@ def post_document_request(request):
         form = DocumentRequestForm(request.POST)
         if form.is_valid():
             doc_request = form.save()
-            email_students(doc_request)
+
+            params = create_email(obj=doc_request)
+            send_email(params['subject'], params['body'], params['to'])
+
             messages.success(request, 'Document request posted successfully.')
             return redirect('app:post_document_request')
     else:
@@ -150,7 +155,8 @@ def download_all(request):
     return response
 
 def mail_staff(request):
-    pass
+    print 'yes!'
+    return HttpResponse
 
 def logout(request):
     auth_logout(request)

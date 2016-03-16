@@ -7,7 +7,11 @@ from __future__ import unicode_literals
 from django.db.models.fields import SlugField
 from django.utils.encoding import smart_text
 from django.utils.text import slugify
+from django.contrib.auth.models import User
 from django.conf import settings
+from django.core.mail import EmailMultiAlternatives
+from django.contrib.sites.models import Site
+from django.template import loader
 
 __all__ = ['AutoSlugField', ]
 
@@ -90,3 +94,40 @@ def zipdir(src, dst):
 
     zf.close()
     return zf
+
+def make_context(obj):
+    current_site = Site.objects.get_current()
+
+    return {
+        'domain': current_site.domain,
+        'obj': obj,
+        'type': obj.object_type,
+        'site_name': current_site.name,
+        'protocol': 'http',
+    }
+
+def create_email(obj=None):
+    if obj is not None:
+        if obj.object_type == 'announcement':
+            subject = 'New Announcement: %s' % obj.title
+        if obj.object_type == 'document request':
+            subject = 'New Document Request: %s' % obj.title
+        email_template = 'app/emails/student.html'
+        body = loader.render_to_string(email_template, make_context(obj))
+        to = [user.email for user in User.objects.filter(usertype__user_type='STD')]
+    else:
+        # Mail staff
+        context = {}
+        to = []
+
+    return {
+          'subject': subject,
+          'body': body,
+          'to': to
+        }
+
+def send_email(subject, body, to):
+    msg = EmailMultiAlternatives(subject, body, settings.FROM_EMAIL, to)
+    msg.attach_alternative(body, 'text/html')
+
+    msg.send()

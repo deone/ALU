@@ -58,6 +58,8 @@ class Common(models.Model):
 
 class Announcement(Common):
 
+    object_type = 'announcement'
+
     @models.permalink
     def get_absolute_url(self):
         return 'app:announcement', (self.id, self.slug,)
@@ -74,6 +76,8 @@ class DocumentType(models.Model):
 class DocumentRequest(Common):
     document_type = models.ForeignKey(DocumentType)
     upload_quantity = models.PositiveSmallIntegerField('Number Of Files Allowed')
+
+    object_type = 'document request'
 
     @models.permalink
     def get_absolute_url(self):
