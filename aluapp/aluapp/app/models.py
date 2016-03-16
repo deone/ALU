@@ -10,8 +10,9 @@ import os
 
 def get_upload_path(instance, filename):
     document_type = instance.document_request.document_type.document_type
+    now = timezone.now()
     directory = document_type.replace(' ', '_')
-    return os.path.join('%s/documents/%s/' % (settings.MEDIA_ROOT, directory), filename)
+    return os.path.join('%s/documents/%s/%s/' % (settings.MEDIA_ROOT, now.strftime('%d-%m-%Y'), directory), filename)
 
 class UserType(models.Model):
     STAFF = 'STF'
