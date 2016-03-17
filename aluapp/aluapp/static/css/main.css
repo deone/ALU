@@ -23,6 +23,9 @@ html, body {
 form {
   padding-bottom: 3em;
 }
+.document-form input {
+  margin-bottom: 10px;
+}
 
 /* Home Page */
 .plus-spacer {
