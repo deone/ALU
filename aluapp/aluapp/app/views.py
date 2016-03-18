@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.contrib import messages
 from django.conf import settings
 from django.http import HttpResponse
+from django.utils.datastructures import MultiValueDict
 
 from utils.decorators import *
 from utils import zipdir, create_email, send_email, build_doc_type_lst
@@ -82,16 +83,18 @@ def document_request_detail(request, pk, slug):
     document_request = get_object_or_404(DocumentRequest, pk=pk)
 
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
-        if form.is_valid():
-            document = form.save(commit=False)
-            doc_name = document.document.name
-            document.user = request.user
-            document.document_request = document_request
-            document.document_type = document_request.document_type
-            document.save()
-            messages.success(request, 'Document uploaded successfully.')
-            return redirect('home')
+        for f in request.FILES:
+            field = MultiValueDict({'document': [request.FILES[f]]})
+            form = DocumentForm(request.POST, field)
+            if form.is_valid():
+                document = form.save(commit=False)
+                doc_name = document.document.name
+                document.user = request.user
+                document.document_request = document_request
+                document.document_type = document_request.document_type
+                document.save()
+        messages.success(request, 'Document(s) uploaded successfully.')
+        return redirect('home')
     else:
         form = DocumentForm()
 
@@ -139,6 +142,11 @@ def download_all(request):
     os.remove(_file.filename)
 
     return response
+
+@login_required
+@must_be_staff
+def backup(request):
+    credentials = get_credentials
 
 def mail_staff(request):
     params = create_email('STF', obj=None, lst=document_types)

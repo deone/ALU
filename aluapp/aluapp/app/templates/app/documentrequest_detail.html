@@ -15,6 +15,7 @@
       {% csrf_token %}
       {{ form.non_field_errors }}
 
+      <input type="hidden" id="upload_quantity" name="upload_quantity" value="{{ object_detail.upload_quantity }}">
       <div class="form-group">
         {{ form.document.errors }}
         <label for="{{ form.document.id_for_label }}">{{ form.document.label }}(s)</label>
