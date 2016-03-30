@@ -1,6 +1,7 @@
 html, body {
-  font-family: 'Open Sans Condensed', sans-serif;
-  font-size: 105%;
+  /* font-family: 'Open Sans Condensed', sans-serif; */
+  font-family: 'Abel', sans-serif;
+  /* font-size: 105%; */
 }
 .header {
   margin-bottom: 0;
